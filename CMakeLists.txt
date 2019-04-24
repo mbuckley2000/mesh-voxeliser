@@ -12,5 +12,5 @@ add_subdirectory(lib/googletest)
 include_directories(lib/googletest/googletest/include)
 include_directories(lib/googletest/googlemock/include)
 
-add_executable(voxelise src/main.cpp tests/EigenTests.cpp)
+add_executable(voxelise src/main.cpp tests/EigenTests.cpp tests/BoxTests.cpp src/Box.cpp include/Box.h include/Vectors.h src/Triangle.cpp include/Triangle.h include/Intersectable.h tests/TriangleTests.cpp)
 target_link_libraries(voxelise gtest gtest_main)
