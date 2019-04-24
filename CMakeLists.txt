@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.13)
+project(voxelise)
+
+set(CMAKE_CXX_STANDARD 14)
+
+find_package(Eigen3 REQUIRED)
+include_directories(${EIGEN3_INCLUDE_DIR})
+
+include_directories(lib/libigl/include)
+
+add_subdirectory(lib/googletest)
+include_directories(lib/googletest/googletest/include)
+include_directories(lib/googletest/googlemock/include)
+
+add_executable(voxelise src/main.cpp tests/EigenTests.cpp)
+target_link_libraries(voxelise gtest gtest_main)
