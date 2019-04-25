@@ -15,15 +15,10 @@ void Triangle::project(Eigen::MatrixXf points, Vec3 axis, float *min, float *max
     }
 }
 
-
+/**
+ * Based on code from https://stackoverflow.com/questions/17458562/efficient-aabb-triangle-intersection-in-c-sharp
+ */
 bool Triangle::intersects(Box *box) {
-//    for (int v = 0; v < 3; v++) {
-//        if (box->contains(this->getVertex(v))) {
-//            return true;
-//        }
-//    }
-//    return false;
-
     float triMin, triMax;
 
     //Box normals

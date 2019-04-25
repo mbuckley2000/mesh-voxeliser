@@ -5,6 +5,7 @@
 #include "../include/VoxelGrid.h"
 #include <iostream>
 #include <fstream>
+#include <thread>
 
 //construct with mesh
 //size of bb
@@ -33,21 +34,35 @@ void VoxelGrid::voxelise() {
     this->volumeData = this->allocate3dBoolArray(resolution, resolution, resolution);
     this->set3dBoolArrayToFalse(this->volumeData, resolution, resolution, resolution);
 
-    std::stringstream filename;
-    filename << "voxel_" << resolution << "x" << resolution << "x" << resolution << "_uint8.raw";
-    std::ofstream myfile(filename.str(), std::ios::out | std::ios::binary);
-    //std::ofstream myfile("out.vox");
-    //myfile << resolution << "," << resolution << "," << resolution << ";";
-
-
     for (int x = 0; x < resolution; x++) {
         for (int y = 0; y < resolution; y++) {
             for (int z = 0; z < resolution; z++) {
                 Box box = this->getCell(x, y, z);
                 if (this->mesh->intersects(&box)) {
-                    //Set to 1
+                    //Set to true
                     this->volumeData[z][y][x] = true;
-                    //myfile << x << "," << y << "," << z << ";";
+                }
+            }
+        }
+    }
+
+
+}
+
+
+void VoxelGrid::writeToFile() {
+    int resolution = 1 / this->cellSize;
+    std::stringstream filename;
+    filename << "voxel_" << resolution << "x" << resolution << "x" << resolution << "_uint8.raw";
+    std::ofstream myfile(filename.str(), std::ios::out | std::ios::binary);
+    std::ofstream myfile2("out.vox");
+    myfile2 << resolution << "," << resolution << "," << resolution << ";";
+
+    for (int x = 0; x < resolution; x++) {
+        for (int y = 0; y < resolution; y++) {
+            for (int z = 0; z < resolution; z++) {
+                if (this->volumeData[z][y][x]) {
+                    myfile2 << x << "," << y << "," << z << ";";
                     myfile << (uint8_t) 255; //raw format
                 } else {
                     myfile << (uint8_t) 0; //raw format
@@ -57,14 +72,7 @@ void VoxelGrid::voxelise() {
     }
 
     myfile.close();
-}
-
-
-void VoxelGrid::writeToFile() {
-    std::ofstream myfile;
-    myfile.open("output.txt");
-    myfile << "Writing this to a file.\n";
-    myfile.close();
+    myfile2.close();
 }
 
 void VoxelGrid::set3dBoolArrayToFalse(bool ***array, int xSize, int ySize, int zSize) {
