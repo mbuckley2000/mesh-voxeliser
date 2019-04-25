@@ -6,7 +6,8 @@
 #define VOXELISE_INTERSECTABLE_H
 
 #include "Vectors.h"
-#include "Box.h"
+
+class Box;
 
 class Intersectable {
 public:

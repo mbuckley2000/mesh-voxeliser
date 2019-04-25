@@ -35,7 +35,6 @@ TEST_P(BoxContainsVectorTest, BoxContainsVector) {
 }
 
 INSTANTIATE_TEST_CASE_P
-
 (Default, BoxContainsVectorTest, testing::Values(
         containsState{Vec3(1, 1, 1), Box(Vec3(0, 0, 0), Vec3(5, 5, 5)), true},
         containsState{Vec3(1, 1, 1), Box(Vec3(0, 0, 0), Vec3(0, 0, 0)), false},

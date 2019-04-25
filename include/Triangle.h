@@ -24,15 +24,31 @@ public:
      */
     Triangle(Mat3 vertices);
 
-    bool intersects(Box *box);
+    bool intersects(Box *box) override;
 
     /**
      * Returns the vertex (0, 1, 2) as a vector
      */
     Vec3 getVertex(int vertex);
 
+    /**
+	 * Calculated a bounding box containing all vertices of the triangle
+	 * WIll only be calculated once and then cached
+	 */
+    Box getBoundingBox();
+
+    /**
+	 * Calculates the mid (average) point of the triangle
+	 * Will only be calculated once and then cached
+	 */
+    Vec3 getMidpoint();
+
 private:
     Mat3 vertices;
+    Vec3 midPoint;
+    bool midPointCalculated = false;
+    Box boundingBox;
+    bool boundingBoxCalculated = false;
 };
 
 

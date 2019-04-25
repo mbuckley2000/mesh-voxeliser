@@ -9,6 +9,7 @@
 #include "Vectors.h"
 #include "Triangle.h"
 #include "Box.h"
+#include "TriangleKDNode.h"
 
 class Mesh :
         public Intersectable {
@@ -27,16 +28,26 @@ public:
 
     void calculateBoundingBox();
 
+    void buildKDTree();
+
+    void deleteTriangles();
+
+    void setSize(float size);
+
+    void centerAround(Vec3 origin);
+
     Mesh(std::string filename);
 
     virtual ~Mesh();
 
 
-    virtual bool intersects(Box *box) override;
+    bool intersects(Box *box) override;
 
 private:
     bool trianglesCalculated;
     bool boundingBoxCalculated;
+    TriangleKDNode *kdTree;
+
 };
 
 
