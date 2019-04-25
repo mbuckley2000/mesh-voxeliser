@@ -12,9 +12,10 @@
 
 
 //Mesh must start at 0,0,0
-VoxelGrid::VoxelGrid(Mesh *mesh, float cellSize) {
+VoxelGrid::VoxelGrid(Mesh *mesh, int resolution) {
     this->mesh = mesh;
-    this->cellSize = cellSize;
+    this->resolution = resolution;
+    this->cellSize = 1.0 / resolution;
 }
 
 Box VoxelGrid::getCell(int x, int y, int z) {
@@ -44,8 +45,6 @@ void VoxelGrid::voxeliserThread(int threadID, int numThreads, float resolution) 
 }
 
 void VoxelGrid::voxelise() {
-    int resolution = 1 / this->cellSize;
-
     this->volumeData = this->allocate3dBoolArray(resolution, resolution, resolution);
     this->set3dBoolArrayToFalse(this->volumeData, resolution, resolution, resolution);
 
@@ -66,19 +65,18 @@ void VoxelGrid::voxelise() {
 }
 
 
-void VoxelGrid::writeToFile() {
-    int resolution = 1 / this->cellSize;
-    std::stringstream filename;
-    filename << "voxel_" << resolution << "x" << resolution << "x" << resolution << "_uint8.raw";
-    std::ofstream myfile(filename.str(), std::ios::out | std::ios::binary);
-    std::ofstream myfile2("out.vox");
-    myfile2 << resolution << "," << resolution << "," << resolution << ";";
+void VoxelGrid::writeToFile(char *filename) {
+    //std::stringstream filename;
+    //filename << "voxel_" << resolution << "x" << resolution << "x" << resolution << "_uint8.raw";
+    std::ofstream myfile(filename, std::ios::out | std::ios::binary);
+    //std::ofstream myfile2("out.vox");
+    //myfile2 << resolution << "," << resolution << "," << resolution << ";";
 
     for (int x = 0; x < resolution; x++) {
         for (int y = 0; y < resolution; y++) {
             for (int z = 0; z < resolution; z++) {
                 if (this->volumeData[z][y][x]) {
-                    myfile2 << x << "," << y << "," << z << ";";
+                    //myfile2 << x << "," << y << "," << z << ";";
                     myfile << (uint8_t) 255; //raw format
                 } else {
                     myfile << (uint8_t) 0; //raw format
@@ -88,7 +86,7 @@ void VoxelGrid::writeToFile() {
     }
 
     myfile.close();
-    myfile2.close();
+//    myfile2.close();
 }
 
 void VoxelGrid::set3dBoolArrayToFalse(bool ***array, int xSize, int ySize, int zSize) {

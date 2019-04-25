@@ -16,10 +16,18 @@ TEST(VoxelGridTests, GetCellTest) {
     EXPECT_EQ(expectedCell.maximum, cell.maximum);
 }
 
-TEST(VoxelGridTests, VoxeliseTest) {
+TEST(VoxelGridTests, VoxeliseTestTeddy) {
     Mesh mesh = Mesh("/home/matt/CLionProjects/mesh-voxeliser/teddy.obj");
     VoxelGrid grid = VoxelGrid(&mesh, 0.01);
 
     grid.voxelise();
-    grid.writeToFile();
+    //grid.writeToFile();
+}
+
+TEST(VoxelGridTests, VoxeliseTestBunny) {
+    Mesh mesh = Mesh("/home/matt/CLionProjects/mesh-voxeliser/bunny.obj");
+    VoxelGrid grid = VoxelGrid(&mesh, 0.01);
+
+    grid.voxelise();
+    //grid.writeToFile();
 }

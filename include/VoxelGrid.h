@@ -10,15 +10,16 @@
 
 class VoxelGrid {
 public:
-    VoxelGrid(Mesh *mesh, float cellSize);
+    VoxelGrid(Mesh *mesh, int resolution);
 
     Box getCell(int x, int y, int z);
 
     void voxeliserThread(int threadID, int numThreads, float resolution);
     void voxelise();
 
-    void writeToFile();
+    void writeToFile(char *filename);
 private:
+    int resolution;
     float cellSize;
     Mesh *mesh;
 
