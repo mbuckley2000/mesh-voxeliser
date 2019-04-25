@@ -34,7 +34,7 @@ public:
 
     void setSize(float size);
 
-    void centerAround(Vec3 origin);
+    void moveTo(Vec3 position);
 
     Mesh(std::string filename);
 
@@ -47,7 +47,7 @@ private:
     bool trianglesCalculated;
     bool boundingBoxCalculated;
     TriangleKDNode *kdTree;
-
+    Vec3 translation = Vec3(0, 0, 0);
 };
 
 

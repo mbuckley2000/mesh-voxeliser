@@ -29,13 +29,10 @@ void Mesh::setSize(float size) {
     this->vertices = this->vertices * scaleFactor;
 }
 
-void Mesh::centerAround(Vec3 origin) {
-    //Center around origin
+void Mesh::moveTo(Vec3 position) {
     this->calculateTriangles();
     this->calculateBoundingBox();
-    Vec3 translation = -this->boundingBox.minimum - (this->boundingBox.getSize() / 2);
-
-    this->vertices = this->vertices.colwise() + translation;
+    this->translation = -this->boundingBox.minimum + position;
 }
 
 
@@ -63,7 +60,7 @@ void Mesh::calculateTriangles() {
         //Matrix3f vns;
 
         for (int v = 0; v < 3; v++) {
-            vs.col(v) = (this->vertices.row(face(v)).transpose());
+            vs.col(v) = (this->vertices.row(face(v)).transpose() + this->translation);
             //vns.col(v) = (this->vertexNormals.row(faceVns(v)).transpose());
         }
 
@@ -80,7 +77,7 @@ Mesh::Mesh(std::string filename) {
     trianglesCalculated = false;
     boundingBoxCalculated = false;
     this->setSize(1);
-    //this->centerAround(Vec3(0, 0, 0));
+    this->moveTo(Vec3(0, 0, 0));
     this->calculateTriangles();
     this->calculateBoundingBox();
     this->buildKDTree();

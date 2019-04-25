@@ -17,6 +17,12 @@ TEST(MeshTests, MeshNormalisation) {
     EXPECT_FLOAT_EQ(mesh.boundingBox.getSize()(mesh.boundingBox.largestDim()), 1);
 }
 
+TEST(MeshTests, MoveMeshToOrigin) {
+    Mesh mesh = Mesh("/home/matt/CLionProjects/mesh-voxeliser/teddy.obj");
+    Vec3 origin = Vec3(0, 0, 0);
+    EXPECT_EQ(mesh.boundingBox.minimum, origin);
+}
+
 TEST(MeshTests, IntersectFalse) {
     Mesh mesh = Mesh("/home/matt/CLionProjects/mesh-voxeliser/teddy.obj");
     Box box = Box(Vec3(100, 100, 100), Vec3(101, 101, 101));
