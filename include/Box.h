@@ -36,6 +36,8 @@ public:
 
     Vec3 getSize();
 
+    Eigen::MatrixXf getVertices();
+
     bool intersects(Box *box) override;
 };
 

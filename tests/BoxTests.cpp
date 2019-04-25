@@ -4,6 +4,28 @@
 
 #include <gtest/gtest.h>
 #include "../include/Box.h"
+#include <stdio.h>
+
+TEST(BoxTests, GetVerticesTest) {
+    Vec3 min = Vec3(0, 0, 0);
+    Vec3 max = Vec3(1, 1, 1);
+
+    Box b = Box(min, max);
+
+    Eigen::MatrixXf expected(8, 3);
+    expected << 0, 0, 0,
+            0, 0, 1,
+            0, 1, 0,
+            0, 1, 1,
+            1, 0, 0,
+            1, 0, 1,
+            1, 1, 0,
+            1, 1, 1;
+
+    Eigen::MatrixXf mat = b.getVertices();
+
+    EXPECT_EQ(expected.transpose(), mat);
+}
 
 
 TEST(BoxTests, BoxInit) {

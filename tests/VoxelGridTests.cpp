@@ -15,3 +15,11 @@ TEST(VoxelGridTests, GetCellTest) {
     EXPECT_EQ(expectedCell.minimum, cell.minimum);
     EXPECT_EQ(expectedCell.maximum, cell.maximum);
 }
+
+TEST(VoxelGridTests, VoxeliseTest) {
+    Mesh mesh = Mesh("/home/matt/CLionProjects/mesh-voxeliser/teddy.obj");
+    VoxelGrid grid = VoxelGrid(&mesh, 0.01);
+
+    grid.voxelise();
+    grid.writeToFile();
+}

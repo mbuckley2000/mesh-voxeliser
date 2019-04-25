@@ -78,3 +78,23 @@ bool Box::intersects(Box *box) {
 
     return true;
 }
+
+Eigen::MatrixXf Box::getVertices() {
+    Eigen::MatrixXf vertices(3, 8);
+
+    Mat3 minMax = Mat3();
+    minMax.col(0) = this->minimum;
+    minMax.col(1) = this->maximum;
+
+    int counter = 0;
+
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 2; j++) {
+            for (int k = 0; k < 2; k++) {
+                vertices.col(counter++) = Vec3(minMax.col(i)(0), minMax.col(j)(1), minMax.col(k)(2));
+            }
+        }
+    }
+
+    return vertices;
+}

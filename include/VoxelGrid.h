@@ -14,9 +14,20 @@ public:
 
     Box getCell(int x, int y, int z);
 
+    void voxelise();
+
+    void writeToFile();
 private:
     float cellSize;
     Mesh *mesh;
+
+    void set3dBoolArrayToFalse(bool ***array, int xSize, int ySize, int zSize);
+
+    bool ***allocate3dBoolArray(int xSize, int ySize, int zSize);
+
+    void free3dBoolArray(bool ***array, int xSize, int ySize, int zSize);
+
+    bool ***volumeData;
 };
 
 

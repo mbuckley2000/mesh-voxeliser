@@ -37,6 +37,10 @@ public:
 	 */
     Box getBoundingBox();
 
+    void calculateNormal();
+
+    void calculateEdges();
+
     /**
 	 * Calculates the mid (average) point of the triangle
 	 * Will only be calculated once and then cached
@@ -45,10 +49,14 @@ public:
 
 private:
     Mat3 vertices;
+    Mat3 edges;
     Vec3 midPoint;
+    Vec3 normal;
     bool midPointCalculated = false;
     Box boundingBox;
     bool boundingBoxCalculated = false;
+
+    void project(Eigen::MatrixXf points, Vec3 axis, float *min, float *max);
 };
 
 
