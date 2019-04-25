@@ -62,5 +62,7 @@ INSTANTIATE_TEST_CASE_P
         intersectState{Triangle(Vec3(0.1, 0.1, 0.1), Vec3(0.3, 0.3, 0.3), Vec3(0.1, 0.3, 0.1)),
                        Box(Vec3(0, 0, 0), Vec3(1, 1, 1)), true},
         intersectState{Triangle(Vec3(100, 100, 100), Vec3(101, 101, 101), Vec3(100, 101, 100)),
-                       Box(Vec3(0, 0, 0), Vec3(1, 1, 1)), false}
+                       Box(Vec3(0, 0, 0), Vec3(1, 1, 1)), false},
+        intersectState{Triangle(Vec3(-1, 0, 0), Vec3(2, 0, 0), Vec3(-1, -1, 0)),
+                       Box(Vec3(0, 0, 0), Vec3(1, 1, 1)), true}
 ));
