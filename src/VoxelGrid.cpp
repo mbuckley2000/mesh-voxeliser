@@ -28,13 +28,9 @@ Box VoxelGrid::getCell(int x, int y, int z) {
     return Box(minimum, maximum);
 }
 
-void VoxelGrid::voxelise() {
-    int resolution = 1 / this->cellSize;
 
-    this->volumeData = this->allocate3dBoolArray(resolution, resolution, resolution);
-    this->set3dBoolArrayToFalse(this->volumeData, resolution, resolution, resolution);
-
-    for (int x = 0; x < resolution; x++) {
+void VoxelGrid::voxeliserThread(int threadID, int numThreads, float resolution) {
+    for (int x = threadID; x < resolution; x += numThreads) {
         for (int y = 0; y < resolution; y++) {
             for (int z = 0; z < resolution; z++) {
                 Box box = this->getCell(x, y, z);
@@ -45,8 +41,28 @@ void VoxelGrid::voxelise() {
             }
         }
     }
+}
 
+void VoxelGrid::voxelise() {
+    int resolution = 1 / this->cellSize;
 
+    this->volumeData = this->allocate3dBoolArray(resolution, resolution, resolution);
+    this->set3dBoolArrayToFalse(this->volumeData, resolution, resolution, resolution);
+
+    //Split workload between threads
+    //Each thread gets it's ID and the number of threads
+    //It starts at c=ID, then increments by num_threads
+    //Interlaced pattern
+    //Spreads work
+    std::vector<std::thread> threads;
+    const int numThreads = 8;
+    for (int i = 0; i < numThreads; i++) {
+        threads.push_back(std::thread(&VoxelGrid::voxeliserThread, this, i, numThreads, resolution));
+    }
+    //Wait for threads to finish
+    for (int i = 0; i < numThreads; i++) {
+        threads[i].join();
+    }
 }
 
 
