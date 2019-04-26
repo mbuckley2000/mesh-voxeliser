@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     // Check the number of parameters
     if (argc < 5) {
         // Tell the user how to run the program
-        std::cerr << "Usage: " << argv[0] << " <INPUT_FILE> <OUTPUT_FILE> <RESOLUTION> <MUM_THREADS>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <INPUT_FILE> <OUTPUT_FILE> <RESOLUTION> <NUM_THREADS>" << std::endl;
         return 1;
     }
 
