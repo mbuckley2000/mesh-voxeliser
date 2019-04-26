@@ -48,13 +48,12 @@ TEST_P(BoxContainsVectorTest, BoxContainsVector)
     EXPECT_EQ(success, params.success);
 }
 
-INSTANTIATE_TEST_CASE_P(
-    Default,
-    BoxContainsVectorTest,
-    testing::Values(containsState{Vec3(1, 1, 1), Box(Vec3(0, 0, 0), Vec3(5, 5, 5)), true},
-                    containsState{Vec3(1, 1, 1), Box(Vec3(0, 0, 0), Vec3(0, 0, 0)), false},
-                    containsState{Vec3(1, 1, 1), Box(Vec3(2, 2, 2), Vec3(0, 0, 0)), false},
-                    containsState{Vec3(0, 0, 0), Box(Vec3(0, 0, 0), Vec3(5, 5, 5)), true},
-                    containsState{Vec3(5, 5, 5), Box(Vec3(0, 0, 0), Vec3(5, 5, 5)), true},
-                    containsState{Vec3(0, 0, 0), Box(Vec3(0, 0, 0), Vec3(0, 0, 0)), true},
-                    containsState{Vec3(1000, 0, 0), Box(Vec3(0, 0, 0), Vec3(1, 1, 1)), false}));
+INSTANTIATE_TEST_CASE_P(Default,
+                        BoxContainsVectorTest,
+                        testing::Values(containsState{Vec3(1, 1, 1), Box(Vec3(0, 0, 0), Vec3(5, 5, 5)), true},
+                                        containsState{Vec3(1, 1, 1), Box(Vec3(0, 0, 0), Vec3(0, 0, 0)), false},
+                                        containsState{Vec3(1, 1, 1), Box(Vec3(2, 2, 2), Vec3(0, 0, 0)), false},
+                                        containsState{Vec3(0, 0, 0), Box(Vec3(0, 0, 0), Vec3(5, 5, 5)), true},
+                                        containsState{Vec3(5, 5, 5), Box(Vec3(0, 0, 0), Vec3(5, 5, 5)), true},
+                                        containsState{Vec3(0, 0, 0), Box(Vec3(0, 0, 0), Vec3(0, 0, 0)), true},
+                                        containsState{Vec3(1000, 0, 0), Box(Vec3(0, 0, 0), Vec3(1, 1, 1)), false}));

@@ -17,8 +17,7 @@ TEST(TriangleKDNodeTests, TriangleConstructor)
 
     for (int i = 0; i < 100; i++)
     {
-        Triangle *t = new Triangle(Vec3(i * 100, i * 100, i * 100), Vec3(i / 100, i / 100, i / 100),
-                                   Vec3(2 * i, 2 * i, 2 * i));
+        Triangle *t = new Triangle(Vec3(i * 100, i * 100, i * 100), Vec3(i / 100, i / 100, i / 100), Vec3(2 * i, 2 * i, 2 * i));
         vec.push_back(t);
     }
 

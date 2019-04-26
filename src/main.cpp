@@ -10,14 +10,22 @@ bool fileExists(const std::string &name)
     return (stat(name.c_str(), &buffer) == 0);
 }
 
+int runTests(int argc, char *argv[])
+{
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
+
 int main(int argc, char *argv[])
 {
+
+    return (runTests(argc, argv));
+
     // Check the number of parameters
     if (argc < 5)
     {
         // Tell the user how to run the program
-        std::cerr << "Usage: " << argv[0]
-                  << " <INPUT_FILE> <OUTPUT_FILE> <RESOLUTION> <NUM_THREADS>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <INPUT_FILE> <OUTPUT_FILE> <RESOLUTION> <NUM_THREADS>" << std::endl;
         return 1;
     }
 
@@ -37,7 +45,4 @@ int main(int argc, char *argv[])
     voxelGrid.writeToFile(argv[2]);
 
     return 0;
-
-    //    testing::InitGoogleTest(&argc, argv);
-    //    return RUN_ALL_TESTS();
 }

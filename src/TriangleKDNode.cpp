@@ -22,10 +22,7 @@ struct CompareDimensions
 {
     explicit CompareDimensions(int dimension) { this->dimension = dimension; }
 
-    bool operator()(Triangle *i, Triangle *j)
-    {
-        return (i->getMidpoint()(dimension) < j->getMidpoint()(dimension));
-    }
+    bool operator()(Triangle *i, Triangle *j) { return (i->getMidpoint()(dimension) < j->getMidpoint()(dimension)); }
 
     int dimension;
 };
@@ -69,8 +66,7 @@ void TriangleKDNode::balance()
     // Much faster than sort() with same eventual outcome (almost 2x speed)
     const int medianArrayPos = this->triangles.size() / 2;
     const int largestDim     = this->boundingBox.largestDim();
-    std::nth_element(triangles.begin(), triangles.begin() + medianArrayPos, triangles.end(),
-                     CompareDimensions(largestDim));
+    std::nth_element(triangles.begin(), triangles.begin() + medianArrayPos, triangles.end(), CompareDimensions(largestDim));
 
     // Left tree becomes all photons less than median
     this->left = new TriangleKDNode(sliceVec(0, medianArrayPos, triangles));
@@ -78,8 +74,7 @@ void TriangleKDNode::balance()
     if (medianArrayPos + 1 < triangles.size())
     {
         // Right tree becomes all photons greater than median
-        this->right =
-            new TriangleKDNode(sliceVec(medianArrayPos + 1, triangles.size() - 1, triangles));
+        this->right = new TriangleKDNode(sliceVec(medianArrayPos + 1, triangles.size() - 1, triangles));
     }
 
     return;

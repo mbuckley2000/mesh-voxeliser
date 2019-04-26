@@ -111,8 +111,7 @@ Eigen::MatrixXf Box::getVertices()
         {
             for (int k = 0; k < 2; k++)
             {
-                vertices.col(counter++) =
-                    Vec3(minMax.col(i)(0), minMax.col(j)(1), minMax.col(k)(2));
+                vertices.col(counter++) = Vec3(minMax.col(i)(0), minMax.col(j)(1), minMax.col(k)(2));
             }
         }
     }
