@@ -18,7 +18,7 @@ TEST(VoxelGridTests, GetCellTest) {
 
 TEST(VoxelGridTests, VoxeliseTestTeddy) {
     Mesh mesh = Mesh("/home/matt/CLionProjects/mesh-voxeliser/teddy.obj");
-    VoxelGrid grid = VoxelGrid(&mesh, 0.01);
+    VoxelGrid grid = VoxelGrid(&mesh, 70);
 
     grid.voxelise();
     //grid.writeToFile();
@@ -26,7 +26,7 @@ TEST(VoxelGridTests, VoxeliseTestTeddy) {
 
 TEST(VoxelGridTests, VoxeliseTestBunny) {
     Mesh mesh = Mesh("/home/matt/CLionProjects/mesh-voxeliser/bunny.obj");
-    VoxelGrid grid = VoxelGrid(&mesh, 0.01);
+    VoxelGrid grid = VoxelGrid(&mesh, 70);
 
     grid.voxelise();
     //grid.writeToFile();

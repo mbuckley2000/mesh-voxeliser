@@ -75,7 +75,7 @@ void VoxelGrid::writeToFile(char *filename) {
     for (int x = 0; x < resolution; x++) {
         for (int y = 0; y < resolution; y++) {
             for (int z = 0; z < resolution; z++) {
-                if (this->volumeData[z][y][x]) {
+                if (this->volumeData[x][y][z]) {
                     //myfile2 << x << "," << y << "," << z << ";";
                     myfile << (uint8_t) 255; //raw format
                 } else {
