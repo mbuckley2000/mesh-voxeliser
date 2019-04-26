@@ -12,10 +12,11 @@
 
 
 //Mesh must start at 0,0,0
-VoxelGrid::VoxelGrid(Mesh *mesh, int resolution) {
+VoxelGrid::VoxelGrid(Mesh *mesh, int resolution, int numThreads) {
     this->mesh = mesh;
     this->resolution = resolution;
     this->cellSize = 1.0 / resolution;
+    this->numThreads = numThreads;
 }
 
 Box VoxelGrid::getCell(int x, int y, int z) {
@@ -54,7 +55,6 @@ void VoxelGrid::voxelise() {
     //Interlaced pattern
     //Spreads work
     std::vector<std::thread> threads;
-    const int numThreads = 8;
     for (int i = 0; i < numThreads; i++) {
         threads.push_back(std::thread(&VoxelGrid::voxeliserThread, this, i, numThreads, resolution));
     }

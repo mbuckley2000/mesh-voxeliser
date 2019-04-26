@@ -11,9 +11,9 @@ bool fileExists(const std::string &name) {
 
 int main(int argc, char *argv[]) {
     // Check the number of parameters
-    if (argc < 4) {
+    if (argc < 5) {
         // Tell the user how to run the program
-        std::cerr << "Usage: " << argv[0] << " <INPUT_FILE> <OUTPUT_FILE> <RESOLUTION>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <INPUT_FILE> <OUTPUT_FILE> <RESOLUTION> <MUM_THREADS>" << std::endl;
         return 1;
     }
 
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
     //TODO Check the input file has a valid extension
 
     Mesh mesh = Mesh(argv[1]);
-    VoxelGrid voxelGrid = VoxelGrid(&mesh, atof(argv[3]));
+    VoxelGrid voxelGrid = VoxelGrid(&mesh, atof(argv[3]), atoi(argv[4]));
     voxelGrid.voxelise();
     voxelGrid.writeToFile(argv[2]);
 
