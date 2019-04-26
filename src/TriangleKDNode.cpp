@@ -1,7 +1,3 @@
-//
-// Created by matt on 24/04/19.
-//
-
 #include "../include/TriangleKDNode.h"
 
 /*

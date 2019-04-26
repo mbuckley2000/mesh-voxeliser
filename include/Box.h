@@ -1,7 +1,3 @@
-//
-// Created by matt on 24/04/19.
-//
-
 #ifndef VOXELISE_BOX_H
 #define VOXELISE_BOX_H
 

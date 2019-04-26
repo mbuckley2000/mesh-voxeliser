@@ -1,7 +1,3 @@
-//
-// Created by matt on 25/04/19.
-//
-
 #include <gtest/gtest.h>
 #include "../include/VoxelGrid.h"
 

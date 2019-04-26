@@ -1,7 +1,3 @@
-//
-// Created by matt on 25/04/19.
-//
-
 #ifndef VOXELISE_VOXELGRID_H
 #define VOXELISE_VOXELGRID_H
 

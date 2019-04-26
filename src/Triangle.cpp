@@ -1,7 +1,3 @@
-//
-// Created by matt on 24/04/19.
-//
-
 #include "../include/Triangle.h"
 
 void Triangle::project(Eigen::MatrixXf points, Vec3 axis, float *min, float *max)

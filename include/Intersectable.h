@@ -1,7 +1,3 @@
-//
-// Created by matt on 24/04/19.
-//
-
 #ifndef VOXELISE_INTERSECTABLE_H
 #define VOXELISE_INTERSECTABLE_H
 

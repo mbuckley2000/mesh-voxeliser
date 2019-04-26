@@ -1,7 +1,3 @@
-//
-// Created by matt on 24/04/19.
-//
-
 #ifndef VOXELISE_MESH_H
 #define VOXELISE_MESH_H
 

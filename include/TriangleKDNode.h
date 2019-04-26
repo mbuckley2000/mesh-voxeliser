@@ -1,7 +1,3 @@
-//
-// Created by matt on 24/04/19.
-//
-
 #ifndef VOXELISE_TRIANGLEKDNODE_H
 #define VOXELISE_TRIANGLEKDNODE_H
 

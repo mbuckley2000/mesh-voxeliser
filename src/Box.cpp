@@ -1,7 +1,3 @@
-//
-// Created by matt on 24/04/19.
-//
-
 #include "../include/Box.h"
 
 Box::Box(Vec3 minimum, Vec3 maximum)

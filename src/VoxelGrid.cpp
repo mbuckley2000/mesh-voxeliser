@@ -1,7 +1,3 @@
-//
-// Created by matt on 25/04/19.
-//
-
 #include "../include/VoxelGrid.h"
 #include <fstream>
 #include <iostream>

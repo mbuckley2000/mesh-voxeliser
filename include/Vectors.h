@@ -1,7 +1,3 @@
-//
-// Created by matt on 24/04/19.
-//
-
 #ifndef VOXELISE_VECTORS_H
 #define VOXELISE_VECTORS_H
 
