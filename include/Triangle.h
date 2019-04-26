@@ -9,6 +9,8 @@
 class Triangle : public Intersectable
 {
   public:
+    Vec3 normal;
+
     /**
      * Construct from three vertices
      */
@@ -46,7 +48,6 @@ class Triangle : public Intersectable
     Mat3 vertices;
     Mat3 edges;
     Vec3 midPoint;
-    Vec3 normal;
     bool midPointCalculated = false;
     Box boundingBox;
     bool boundingBoxCalculated = false;
