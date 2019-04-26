@@ -5,11 +5,11 @@
 #ifndef VOXELISE_VOXELGRID_H
 #define VOXELISE_VOXELGRID_H
 
-
 #include "Mesh.h"
 
-class VoxelGrid {
-public:
+class VoxelGrid
+{
+  public:
     VoxelGrid(Mesh *mesh, int resolution, int numThreads);
 
     Box getCell(int x, int y, int z);
@@ -18,7 +18,8 @@ public:
     void voxelise();
 
     void writeToFile(char *filename);
-private:
+
+  private:
     int resolution;
     int numThreads;
     float cellSize;
@@ -33,5 +34,4 @@ private:
     bool ***volumeData;
 };
 
-
-#endif //VOXELISE_VOXELGRID_H
+#endif  // VOXELISE_VOXELGRID_H

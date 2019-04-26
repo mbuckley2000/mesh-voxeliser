@@ -9,9 +9,9 @@
 
 class Box;
 
-class Intersectable {
-public:
-
+class Intersectable
+{
+  public:
     Intersectable() = default;
 
     virtual ~Intersectable() = default;
@@ -22,5 +22,4 @@ public:
     virtual bool intersects(Box *box) = 0;
 };
 
-
-#endif //VOXELISE_INTERSECTABLE_H
+#endif  // VOXELISE_INTERSECTABLE_H

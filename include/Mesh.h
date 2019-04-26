@@ -5,19 +5,19 @@
 #ifndef VOXELISE_MESH_H
 #define VOXELISE_MESH_H
 
-#include "Intersectable.h"
-#include "Vectors.h"
-#include "Triangle.h"
 #include "Box.h"
+#include "Intersectable.h"
+#include "Triangle.h"
 #include "TriangleKDNode.h"
+#include "Vectors.h"
 
-class Mesh :
-        public Intersectable {
-public:
+class Mesh : public Intersectable
+{
+  public:
     Eigen::MatrixXf vertices;
     Eigen::MatrixXf vertexNormals;
     Eigen::MatrixXi faces;
-    Eigen::MatrixXi faceVns;//   FN  #F list of face indices into vertex normals
+    Eigen::MatrixXi faceVns;  //   FN  #F list of face indices into vertex normals
     Box boundingBox;
 
     std::vector<Triangle *> triangles;
@@ -40,15 +40,13 @@ public:
 
     virtual ~Mesh();
 
-
     bool intersects(Box *box) override;
 
-private:
+  private:
     bool trianglesCalculated;
     bool boundingBoxCalculated;
     TriangleKDNode *kdTree;
     Vec3 translation = Vec3(0, 0, 0);
 };
 
-
-#endif //VOXELISE_MESH_H
+#endif  // VOXELISE_MESH_H

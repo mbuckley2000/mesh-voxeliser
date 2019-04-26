@@ -5,13 +5,14 @@
 #ifndef VOXELISE_TRIANGLEKDNODE_H
 #define VOXELISE_TRIANGLEKDNODE_H
 
-#include "Vectors.h"
 #include "Box.h"
-#include "Triangle.h"
 #include "Intersectable.h"
+#include "Triangle.h"
+#include "Vectors.h"
 
-class TriangleKDNode {
-public:
+class TriangleKDNode
+{
+  public:
     Box boundingBox;
     TriangleKDNode *left;
     TriangleKDNode *right;
@@ -34,7 +35,7 @@ public:
      */
     bool intersects(Box *box);
 
-private:
+  private:
     /**
      * Builds a balanced KD tree from the triangles
      */
@@ -46,5 +47,4 @@ private:
     void expandBoundingBox();
 };
 
-
-#endif //VOXELISE_TRIANGLEKDNODE_H
+#endif  // VOXELISE_TRIANGLEKDNODE_H
