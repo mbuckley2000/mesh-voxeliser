@@ -14,7 +14,7 @@ public:
 
     Box getCell(int x, int y, int z);
 
-    void voxeliserThread(int threadID, int numThreads, float resolution);
+    void voxeliserThread(int threadID, int numThreads, int resolution);
     void voxelise();
 
     void writeToFile(char *filename);

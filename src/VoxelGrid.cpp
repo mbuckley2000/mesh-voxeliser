@@ -31,7 +31,7 @@ Box VoxelGrid::getCell(int x, int y, int z) {
 }
 
 
-void VoxelGrid::voxeliserThread(int threadID, int numThreads, float resolution) {
+void VoxelGrid::voxeliserThread(int threadID, int numThreads, int resolution) {
     for (int x = threadID; x < resolution; x += numThreads) {
         for (int y = 0; y < resolution; y++) {
             for (int z = 0; z < resolution; z++) {
