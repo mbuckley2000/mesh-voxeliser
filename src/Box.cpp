@@ -14,19 +14,6 @@ Box::Box()
 
 Box::~Box() = default;
 
-bool Box::contains(Vec3 v)
-{
-    for (int d = 0; d < 3; d++)
-    {
-        if (v(d) > this->maximum(d) || v(d) < this->minimum(d))
-        {
-            return false;
-        }
-    }
-
-    return true;
-}
-
 void Box::expand(Vec3 v)
 {
     for (int d = 0; d < 3; d++)

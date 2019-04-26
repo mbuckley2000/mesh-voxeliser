@@ -14,8 +14,6 @@ class Box : Intersectable
 
     virtual ~Box();
 
-    bool contains(Vec3 v);
-
     /**
      * Expands the box to include the given point
      */
