@@ -15,6 +15,11 @@ VoxelGrid::VoxelGrid(Mesh *mesh, int resolution, int numThreads)
     this->numThreads = numThreads;
 }
 
+VoxelGrid::~VoxelGrid()
+{
+    this->free3dBoolArray(this->volumeData, this->resolution, this->resolution, this->resolution);
+}
+
 Box VoxelGrid::getCell(int x, int y, int z)
 {
     // Starting grid from 0, 0, 0

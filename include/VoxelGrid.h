@@ -7,6 +7,7 @@ class VoxelGrid
 {
   public:
     VoxelGrid(Mesh *mesh, int resolution, int numThreads);
+    ~VoxelGrid();
 
     Box getCell(int x, int y, int z);
 
