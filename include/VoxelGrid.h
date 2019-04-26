@@ -11,7 +11,7 @@ class VoxelGrid
 
     Box getCell(int x, int y, int z);
 
-    void voxeliserThread(int threadID, int numThreads, int resolution);
+    void voxeliserThread(int threadID);
     void voxelise();
 
     void writeToFile(char *filename);
@@ -19,6 +19,7 @@ class VoxelGrid
   private:
     int resolution;
     int numThreads;
+    bool allocated = false;
     float cellSize;
     Mesh *mesh;
 

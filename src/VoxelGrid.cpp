@@ -3,12 +3,11 @@
 #include <iostream>
 #include <thread>
 
-// construct with mesh
-// size of bb
-
-// Mesh must start at 0,0,0
 VoxelGrid::VoxelGrid(Mesh *mesh, int resolution, int numThreads)
 {
+    assert(resolution > 0);
+    assert(numThreads > 0);
+
     this->mesh       = mesh;
     this->resolution = resolution;
     this->cellSize   = 1.0 / resolution;
@@ -22,8 +21,10 @@ VoxelGrid::~VoxelGrid()
 
 Box VoxelGrid::getCell(int x, int y, int z)
 {
-    // Starting grid from 0, 0, 0
+    assert(x >= 0 && y >= 0 && z >= 0);
+    assert(x < this->resolution && y < this->resolution && z < this->resolution);
 
+    // Starting grid from 0, 0, 0
     // Multiply coordinate by cell size to get start of box
     Vec3 minimum = Vec3(x, y, z) * this->cellSize;
     // Box is a cube, same size as cell size
@@ -32,8 +33,11 @@ Box VoxelGrid::getCell(int x, int y, int z)
     return Box(minimum, maximum);
 }
 
-void VoxelGrid::voxeliserThread(int threadID, int numThreads, int resolution)
+void VoxelGrid::voxeliserThread(int threadID)
 {
+    assert(threadID >= 0);
+    assert(threadID < numThreads);
+
     for (int x = threadID; x < resolution; x += numThreads)
     {
         for (int y = 0; y < resolution; y++)
@@ -53,7 +57,13 @@ void VoxelGrid::voxeliserThread(int threadID, int numThreads, int resolution)
 
 void VoxelGrid::voxelise()
 {
+    if (allocated)
+    {
+        free3dBoolArray(volumeData, resolution, resolution, resolution);
+    }
+
     this->volumeData = this->allocate3dBoolArray(resolution, resolution, resolution);
+    allocated        = true;
     this->set3dBoolArrayToFalse(this->volumeData, resolution, resolution, resolution);
 
     // Split workload between threads
@@ -64,9 +74,9 @@ void VoxelGrid::voxelise()
     std::vector<std::thread> threads;
     for (int i = 0; i < numThreads; i++)
     {
-        threads.push_back(
-            std::thread(&VoxelGrid::voxeliserThread, this, i, numThreads, resolution));
+        threads.push_back(std::thread(&VoxelGrid::voxeliserThread, this, i));
     }
+
     // Wait for threads to finish
     for (int i = 0; i < numThreads; i++)
     {
@@ -76,11 +86,7 @@ void VoxelGrid::voxelise()
 
 void VoxelGrid::writeToFile(char *filename)
 {
-    // std::stringstream filename;
-    // filename << "voxel_" << resolution << "x" << resolution << "x" << resolution << "_uint8.raw";
     std::ofstream myfile(filename, std::ios::out | std::ios::binary);
-    // std::ofstream myfile2("out.vox");
-    // myfile2 << resolution << "," << resolution << "," << resolution << ";";
 
     for (int x = 0; x < resolution; x++)
     {
@@ -90,19 +96,17 @@ void VoxelGrid::writeToFile(char *filename)
             {
                 if (this->volumeData[x][y][z])
                 {
-                    // myfile2 << x << "," << y << "," << z << ";";
-                    myfile << (uint8_t)255;  // raw format
+                    myfile << (uint8_t)255;
                 }
                 else
                 {
-                    myfile << (uint8_t)0;  // raw format
+                    myfile << (uint8_t)0;
                 }
             }
         }
     }
 
     myfile.close();
-    //    myfile2.close();
 }
 
 void VoxelGrid::set3dBoolArrayToFalse(bool ***array, int xSize, int ySize, int zSize)
@@ -130,7 +134,6 @@ bool ***VoxelGrid::allocate3dBoolArray(int xSize, int ySize, int zSize)
             data[z][y] = (bool *)malloc(sizeof(bool) * xSize);
         }
     }
-
     return data;
 }
 
