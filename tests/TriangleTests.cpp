@@ -33,6 +33,29 @@ TEST(TriangleTests, TriangleInitMat)
     EXPECT_EQ(t.getVertex(2), v2);
 }
 
+TEST(TriangleTests, GetMidpoint)
+{
+    Triangle t(Vec3(0, 1, 0), Vec3(1, 1, 1), Vec3(2, 1, 2));
+    EXPECT_EQ(Vec3(1, 1, 1), t.getMidpoint());
+}
+
+TEST(TriangleTests, CalculateNormal)
+{
+    Triangle t(Vec3(0, 0, 0), Vec3(1, 0, 0), Vec3(1, 1, 0));
+    t.calculateNormal();
+
+    Vec3 expectedNormal = Vec3(0, 0, 1);
+    EXPECT_FLOAT_EQ(expectedNormal.squaredNorm(), t.normal.dot(expectedNormal));
+}
+
+TEST(TriangleTests, GetBoundingBox)
+{
+    Triangle t(Vec3(0, 1, 0), Vec3(1, 1, 1), Vec3(2, 1, 2));
+
+    EXPECT_EQ(Vec3(0, 1, 0), t.getBoundingBox().minimum);
+    EXPECT_EQ(Vec3(2, 1, 2), t.getBoundingBox().maximum);
+}
+
 struct intersectState
 {
     Triangle triangle;
