@@ -10,7 +10,10 @@ void Mesh::loadFromFile(std::string filename)
     Eigen::MatrixXi faceTex;  //   FTC  #F list of face indices into vertex texture coordinates
 
     // Read file into our arrays
-    igl::readOBJ(filename, this->vertices, texCoords, this->vertexNormals, this->faces, faceTex, this->faceVns);
+    if (!igl::readOBJ(filename, this->vertices, texCoords, this->vertexNormals, this->faces, faceTex, this->faceVns)) {
+        //Failed to read object
+        exit(2);
+    }
 }
 
 void Mesh::setSize(float size)
