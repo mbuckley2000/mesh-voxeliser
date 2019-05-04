@@ -131,6 +131,7 @@ bool TriangleKDNode::intersects(Box *box)
                     if (this->triangles[i]->intersects(box))
                     {
                         triangleHit = true;
+                        break;
                     }
                 }
 
