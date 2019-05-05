@@ -5,75 +5,75 @@
 
 TEST(TriangleTests, TriangleInitVecs)
 {
-    Vec3 v0 = Vec3(110, 0, 880);
-    Vec3 v1 = Vec3(1555, 1, 17);
-    Vec3 v2 = Vec3(61, 135, 22);
+  Vec3 v0 = Vec3(110, 0, 880);
+  Vec3 v1 = Vec3(1555, 1, 17);
+  Vec3 v2 = Vec3(61, 135, 22);
 
-    Triangle t = Triangle(v0, v1, v2);
+  Triangle t = Triangle(v0, v1, v2);
 
-    EXPECT_EQ(t.getVertex(0), v0);
-    EXPECT_EQ(t.getVertex(1), v1);
-    EXPECT_EQ(t.getVertex(2), v2);
+  EXPECT_EQ(t.getVertex(0), v0);
+  EXPECT_EQ(t.getVertex(1), v1);
+  EXPECT_EQ(t.getVertex(2), v2);
 }
 
 TEST(TriangleTests, TriangleInitMat)
 {
-    Mat3 m = Mat3();
+  Mat3 m = Mat3();
 
-    Vec3 v0 = Vec3(110, 0, 880);
-    Vec3 v1 = Vec3(1555, 1, 17);
-    Vec3 v2 = Vec3(61, 135, 22);
+  Vec3 v0 = Vec3(110, 0, 880);
+  Vec3 v1 = Vec3(1555, 1, 17);
+  Vec3 v2 = Vec3(61, 135, 22);
 
-    m << v0, v1, v2;
+  m << v0, v1, v2;
 
-    Triangle t = Triangle(m);
+  Triangle t = Triangle(m);
 
-    EXPECT_EQ(t.getVertex(0), v0);
-    EXPECT_EQ(t.getVertex(1), v1);
-    EXPECT_EQ(t.getVertex(2), v2);
+  EXPECT_EQ(t.getVertex(0), v0);
+  EXPECT_EQ(t.getVertex(1), v1);
+  EXPECT_EQ(t.getVertex(2), v2);
 }
 
 TEST(TriangleTests, GetMidpoint)
 {
-    Triangle t(Vec3(0, 1, 0), Vec3(1, 1, 1), Vec3(2, 1, 2));
-    EXPECT_EQ(Vec3(1, 1, 1), t.getMidpoint());
+  Triangle t(Vec3(0, 1, 0), Vec3(1, 1, 1), Vec3(2, 1, 2));
+  EXPECT_EQ(Vec3(1, 1, 1), t.getMidpoint());
 }
 
 TEST(TriangleTests, CalculateNormal)
 {
-    Triangle t(Vec3(0, 0, 0), Vec3(1, 0, 0), Vec3(1, 1, 0));
-    t.calculateNormal();
+  Triangle t(Vec3(0, 0, 0), Vec3(1, 0, 0), Vec3(1, 1, 0));
+  t.calculateNormal();
 
-    Vec3 expectedNormal = Vec3(0, 0, 1);
-    EXPECT_FLOAT_EQ(expectedNormal.squaredNorm(), t.normal.dot(expectedNormal));
+  Vec3 expectedNormal = Vec3(0, 0, 1);
+  EXPECT_FLOAT_EQ(expectedNormal.squaredNorm(), t.normal.dot(expectedNormal));
 }
 
 TEST(TriangleTests, GetBoundingBox)
 {
-    Triangle t(Vec3(0, 1, 0), Vec3(1, 1, 1), Vec3(2, 1, 2));
+  Triangle t(Vec3(0, 1, 0), Vec3(1, 1, 1), Vec3(2, 1, 2));
 
-    EXPECT_EQ(Vec3(0, 1, 0), t.getBoundingBox().minimum);
-    EXPECT_EQ(Vec3(2, 1, 2), t.getBoundingBox().maximum);
+  EXPECT_EQ(Vec3(0, 1, 0), t.getBoundingBox().minimum);
+  EXPECT_EQ(Vec3(2, 1, 2), t.getBoundingBox().maximum);
 }
 
 struct intersectState
 {
-    Triangle triangle;
-    Box box;
-    bool success;
+  Triangle triangle;
+  Box box;
+  bool success;
 };
 
 struct TriangleIntersectsBoxTest : testing::Test, testing::WithParamInterface<intersectState>
 {
-    // Can do initial values here
+  // Can do initial values here
 };
 
 TEST_P(TriangleIntersectsBoxTest, TriangleIntersectsBox)
 {
-    auto params  = GetParam();
-    bool success = params.triangle.intersects(&params.box);
+  auto params  = GetParam();
+  bool success = params.triangle.intersects(&params.box);
 
-    EXPECT_EQ(success, params.success);
+  EXPECT_EQ(success, params.success);
 }
 
 INSTANTIATE_TEST_CASE_P
