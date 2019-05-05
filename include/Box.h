@@ -29,10 +29,19 @@ public:
    */
   int largestDim();
 
+  /**
+   * Gets the size vector of the box (max - min)
+   */
   Vec3 getSize();
 
+  /**
+   * Returns the vertices of the box in a row matrix format
+   */
   Eigen::MatrixXf getVertices();
 
+  /**
+   * Returns true if the box intersects with the supplied pointer's box
+   */
   bool intersects(Box *box) override;
 
 private:

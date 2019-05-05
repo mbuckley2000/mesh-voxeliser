@@ -21,7 +21,7 @@ TEST(TriangleKDNodeTests, TriangleConstructor)
         vec.push_back(t);
     }
 
-    TriangleKDNode node = TriangleKDNode(vec);
+    TriangleKDNode node = TriangleKDNode(vec, 10);
 
     EXPECT_FALSE(node.triangles.empty());
     EXPECT_NE(node.left, nullptr);

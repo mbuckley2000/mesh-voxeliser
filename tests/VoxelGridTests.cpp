@@ -15,9 +15,9 @@ TEST(VoxelGridTests, GetCellTest)
 
 TEST(VoxelGridTests, VoxeliseTestTeddy)
 {
-    Mesh mesh      = Mesh("/home/matt/CLionProjects/mesh-voxeliser/teddy.obj");
+    Mesh mesh      = Mesh("/home/matt/CLionProjects/voxelise/teddy.obj");
     VoxelGrid grid = VoxelGrid(&mesh, 100, 8);
 
     grid.voxelise();
-    grid.writeToFile("testout.raw");
+    grid.writeToFile("/home/matt/dev/diss/vixel-renderer/testout.raw");
 }

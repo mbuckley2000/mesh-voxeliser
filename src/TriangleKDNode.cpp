@@ -2,6 +2,7 @@
 
 /*
 KD tree for storing HBV for meshes
+Based on code from https://blog.frogslayer.com/kd-trees-for-faster-ray-tracing-with-triangles/
 */
 
 // Construct with an empty vector of triangles for a leaf

@@ -5,31 +5,31 @@
 
 class VoxelGrid
 {
-  public:
-    VoxelGrid(Mesh *mesh, int resolution, int numThreads);
-    ~VoxelGrid();
+public:
+  VoxelGrid(Mesh *mesh, int resolution, int numThreads);
+  ~VoxelGrid();
 
-    Box getCell(int x, int y, int z);
+  Box getCell(int x, int y, int z);
 
-    void voxeliserThread(int threadID);
-    void voxelise();
+  void voxeliserThread(int threadID);
+  void voxelise();
 
-    void writeToFile(char *filename);
+  void writeToFile(char *filename);
 
-  private:
-    int resolution;
-    int numThreads;
-    bool allocated = false;
-    float cellSize;
-    Mesh *mesh;
+private:
+  int resolution;
+  int numThreads;
+  bool allocated = false;
+  float cellSize;
+  Mesh *mesh;
 
-    void set3dBoolArrayToFalse(bool ***array, int xSize, int ySize, int zSize);
+  static void set3dBoolArrayToFalse(bool ***array, int xSize, int ySize, int zSize);
 
-    bool ***allocate3dBoolArray(int xSize, int ySize, int zSize);
+  static bool ***allocate3dBoolArray(int xSize, int ySize, int zSize);
 
-    void free3dBoolArray(bool ***array, int xSize, int ySize, int zSize);
+  static void free3dBoolArray(bool ***array, int xSize, int ySize, int zSize);
 
-    bool ***volumeData;
+  bool ***volumeData;
 };
 
 #endif  // VOXELISE_VOXELGRID_H
